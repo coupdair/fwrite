@@ -1,1 +1,15 @@
-HigHub readme
+device test program for files.
+write file to device (e.g. hard disk) with dummy content to show device speed.
+note:
+can be also used to
+- test maximum file size.
+- fill up ddevice space.
+
+todo:
+1. translate code messages to english.
+2. improve elapsed time measure (presently 1 second accuracy).
+
+usage:
+  fwrite 64 #write a file of 64MB and show elapsed time
+  mfwrite.sh 0 9 256 #write 10 files of 256MB
+
