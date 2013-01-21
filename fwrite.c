@@ -1,15 +1,22 @@
+/**
+ * fwrite C language function call for file writing with dummy content for device test.
+ * author: Sebastien COUDERT
+ * UNIX (Linux, CygWin, MacOSX) compilation: gcc -o fwrite.linux64 fwrite.c -O3 --static
+ * Windows compilation to do using favorite IDE.
+**/
+
 #include <stdio.h>
 #include <time.h>
 
 //#define FWRITE_DEBUG
 
-/* 1024 octets */
+/* 1024 bytes */
 #define SIZE 1024
 
-/* 1024 octets x 1024 = 1 Mo */
+/* 1024 bytes x 1024 = 1 MB */
 #define NB 1024
 
-#define FILENAME "fichier.txt"
+#define FILENAME "file.txt"
 
 struct thestruct
 {
@@ -25,15 +32,15 @@ int main(void)
 
 time_t t[2];
 
-	printf("Entrer la taille du fichier en Mo :\n");
-   if( (scanf("%d",&nb) == 0) || (nb <= 0)   ) {printf("Erreur lors de la saisie du nombre.\n");fflush(stdin);getc(stdin);return 1;}
+	printf("Enter file size in MBytes (MB):\n");
+   if( (scanf("%d",&nb) == 0) || (nb <= 0)   ) {printf("Error when typing the number.\n");fflush(stdin);getc(stdin);return 1;}
 	stat=(float)nb;
 
 t[0] = time(NULL);
 
    if ((stream = fopen(FILENAME, "wb")) == NULL) /* open file TEST.$$$ */
    {
-      fprintf(stderr, "Impossible d'ouvrir le fichier %s en ecriture.\n",FILENAME);
+      fprintf(stderr, "Unable to open file \"%s\" for writing.\n",FILENAME);
       return 1;
    }
 	for(i=0;i<SIZE;){s.str[i++]='-';s.str[i++]='\\';s.str[i++]='|';s.str[i++]='/';}
@@ -59,7 +66,7 @@ t[0] = time(NULL);
 t[1] = time(NULL);
 t[1]-=t[0];
 stat/=(float)t[1];
-printf("Temps d'ecriture du fichier :\n%ld seconde(s), soit %.1f Mo/s.",t[1],stat);
+printf("Writing elapsed time:\n%ld second(s), i.e. %.1f MB/s.",t[1],stat);
 fflush(stdin);getc(stdin);
    return 0;
 }

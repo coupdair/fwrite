@@ -3,13 +3,22 @@ write file to device (e.g. hard disk) with dummy content to show device speed.
 note:
 can be also used to
 - test maximum file size.
-- fill up ddevice space.
+- fill up device space.
 
 todo:
 1. translate code messages to english.
 2. improve elapsed time measure (presently 1 second accuracy).
 
 usage:
-  fwrite 64 #write a file of 64MB and show elapsed time
+  #Linux or cygwin
+  echo 64 | fwrite #write a file of 64MB and show elapsed time
   mfwrite.sh 0 9 256 #write 10 files of 256MB
+
+  #Windows (enter 64 by hand)
+  cd C:\temp
+  fwrite.exe
+
+  #Linux
+  cd /dev/shm
+  mfwrite.sh 0 9 64 #write 10 files of 64MB
 
