@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <time.h>
 
-/* 128 * 8 = 1024 octets */
-#define SIZE 128
-#define REPEAT 8
+//#define FWRITE_DEBUG
+
+/* 1024 octets */
+#define SIZE 1024
 
 /* 1024 octets x 1024 = 1 Mo */
 #define NB 1024
@@ -20,7 +21,6 @@ int main(void)
    FILE *stream;
    struct thestruct s;
    int i,nb;
-   int size=REPEAT/*,out=REPEAT*/;
    float stat;
 
 time_t t[2];
@@ -40,8 +40,20 @@ t[0] = time(NULL);
 	for(i=0;i<nb*NB;i++)
    {
 		/* write struct s to file */
-   	if( /*(out=*/fwrite(&s, sizeof(s), REPEAT, stream)/*)*/ != size ) {/*printf("%d != %d\n",out,size);*/printf("Erreur lors de l'ecriture du fichier.\n");fflush(stdin);getc(stdin);return 1;}
+#ifdef FWRITE_DEBUG
+   int out;
+#endif
+   	if( (
+#ifdef FWRITE_DEBUG
+      out=
+#endif
+      (int)fwrite(&s, sizeof(s), 1, stream)) != 1 ) {
+#ifdef FWRITE_DEBUG
+      printf("sizeof(s)=%d\n",sizeof(s));
+#endif
+      printf("Erreur lors de l'ecriture du fichier.\n");fflush(stdin);getc(stdin);return 1;}
    }
+   fflush(stream);
    fclose(stream); /* close file */
 
 t[1] = time(NULL);
