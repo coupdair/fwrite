@@ -66,7 +66,8 @@ t[0] = time(NULL);
 t[1] = time(NULL);
 t[1]-=t[0];
 stat/=(float)t[1];
-printf("Writing elapsed time:\n%ld second(s), i.e. %.1f MB/s.",t[1],stat);
+printf("Writing elapsed time:\n%ld second(s), i.e. %.1f MB/s.\n",t[1],stat);
 fflush(stdin);getc(stdin);
    return 0;
 }
+

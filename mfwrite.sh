@@ -2,6 +2,7 @@
 
 fwrite=fwrite.MacOSX
 fwrite=fwrite.linux32
+fwrite=fwrite.linux64
 #fwrite=fwriteS.exe
 
 start=1
@@ -19,5 +20,6 @@ echo Writing $totalSize MByte '(i.e. >'`echo $totalSize/1024 | bc`' GByte)'
 for((i=start;i<end+1;i++))
 do
   echo $size | ./$fwrite
-  mv fichier.txt file_`printf %0$digit'd' $i`
+  mv file.txt file_`printf %0$digit'd' $i`
+  sleep 0.1
 done
